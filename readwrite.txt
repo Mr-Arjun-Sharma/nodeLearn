@@ -1,0 +1,16 @@
+Arjun Sharma, Welcome to my channel  
+Hash Table is a data structure which stores data in an associative manner.
+
+node.js includes an additionaldata type is called Buffer
+not available in browser's javascipt.
+Buffer is mainly used to store binary data,
+While reading from a file or receiving packets over the network.
+
+#7
+we pass them a function as an argument '-' a callback '-
+that gget called when task is completes
+the callback has an argument that tells you whether
+the operation completed successfully.
+now we need to say what to do when fs.writeFile
+has completed (even if it's nothing), and start
+checking for errors.

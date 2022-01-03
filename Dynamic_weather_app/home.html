@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div id="quotes"></div>
+    <div id="author"></div>
+    <button id="newQ">New quotes</button>
+    <button id="TweetMe">Tweet</button> -->
+    <div class="container">
+        <div class="inner">
+            <div class="box">
+                <p class="number">
+                    <img src="C:/Users/ARJUN/OneDrive/Desktop/download.png" alt="TweetMe" title="TweetMe" id="TweetMe">
+                </p>
+                <div class="text">
+                    <i class="start-quotes fas fa-quote-left"></i>
+                    <p id="quotes" class="quote"></p>
+                    <p id="author" class="author"></p>
+                    <div>
+                        <label class="button">
+                            <p id="newQ">new quotes</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quotes = document.getElementById("quotes");
+        const author = document.getElementById("author");
+        const newQ = document.getElementById("newQ");
+        const TweetMe = document.getElementById("TweetMe");
+        let realData = "";
+        let quotesData = "";
+        const TweetNow = () => {
+            let tweetPost = `https://twitter.com/intent/tweet?text=${quotesData.text} ${quotesData.author}`;
+            window.open(tweetPost);
+        }
+        const getNewQuotes = () => {
+            let rnum = Math.floor(Math.random()*100);
+            // console.log(rnum);
+            console.log(realData[rnum].text);
+            // console.log(realData[rnum].length);
+            console.log(realData[rnum].author);
+            quotesData = realData[rnum];
+            quotes.innerText = `${realData[rnum].text}`;
+            // // quotes.innerText = `console.log(${realData[rnum].text});`;
+            // if(realData[rnum].author != 'null'){
+            //     author.innerText = `${realData[rnum].author}`;
+            // }else{
+            //     author.innerText = `unknown`;
+            // }
+            quotesData.author == null ? (author.innerText = "UnKnown") : (author.innerText = `${quotesData.author}`);
+            // quotes.innerHTML = `${realData[rnum].text}`;
+            // author.innerHTML = `${realData[rnum].author}`;
+        };
+        const getQuotes = async () => {
+            const api = "https://type.fit/api/quotes";
+            try{
+                let data = await fetch(api);
+                realData = await data.json();
+                getNewQuotes();
+                // console.log(realData[0].text);
+                // console.log(realData[0].length);
+                // console.log(realData[0].author);
+            } catch(error) {
+
+            }
+        };
+        TweetMe.addEventListener('click', TweetNow);
+        newQ.addEventListener('click', getNewQuotes);
+        getQuotes();
+    </script>
+</body>
+</html>
